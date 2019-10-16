@@ -1,0 +1,110 @@
+body {
+  background: var(--color-background);
+  color: var(--color-text-main);
+  font-size: 18px;
+
+}
+
+form {
+  > .input-group {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > input[type='text'],input[type='password']  {
+      padding: 10px;
+      background: var(--color-background);
+      border: 2px transparent var(--color-text-main);
+      border-bottom: 2px solid;
+      border-radius: 5px 5px 0px 0px;
+      font-size: 1.2em;
+    }
+    > label {
+      font-size: 1.2em;
+    }
+    > button {
+      padding: 15px 50px;
+      background: var(--color-background);
+      border: 2px var(--color-text-main) solid;
+      border-radius: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      &:hover {
+        background: var(--color-hover);
+      }
+    }
+
+  }
+  
+}
+
+.global-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  background: var(--color-container);
+  margin: 30px 0px;
+  border-radius: 10px;
+}
+
+nav {
+  display: flex;
+  background: var(--nav-color-background);
+  color: var(--nav-color-text);
+  justify-content: space-between;
+  padding: 0px;
+  margin: 0px;
+
+  >ul {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+
+    > li {
+      list-style: none;
+
+      padding: {
+        left: 20px;
+        right: 20px;
+        top: 5px;
+        bottom: 5px;
+      }
+      margin: 5px;
+
+      > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--nav-color-text);
+        height: 100%;
+        width: 100%;
+        min-width: 100px;
+        text-decoration: none;
+        border-radius: 5px;
+        &:hover{
+          background: var(--nav-color-hover);
+        }
+        > h1 {
+          padding: 10px;
+        }
+        > p {
+          padding: 5px;
+          margin: 0px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    
+
+  }
+}

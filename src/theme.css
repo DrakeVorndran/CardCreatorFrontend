@@ -1,0 +1,11 @@
+:root {
+  --color-background: #EEEEEE;
+  --color-text-main: #222222;
+  --color-container: #CCCCCC;
+  --color-hover: #AAAAAA;
+
+  /* NAVBAR */
+  --nav-color-text: #EEEEEE;
+  --nav-color-background: #222222;
+  --nav-color-hover: #444444;
+}
