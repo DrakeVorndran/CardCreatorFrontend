@@ -1,16 +1,32 @@
 import React, { useState } from 'react'
-
-const auth = (e) => {
+import { Redirect } from 'react-router-dom'
+const auth = (e, updateHasCookie, body, repeat) => {
   e.preventDefault()
-  console.log("Do Auth Stuff")
+  if (repeat === body.password) {
+    fetch('http://localhost:4000/users/new', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+      .then(res => res.json())
+      .then(json => {
+        localStorage.setItem("cardCreatorToken", json.token)
+        updateHasCookie(true)
+      })
+  }
 }
 
 function SignUp() {
   const [username, updateUsername] = useState('')
   const [password, updatePassword] = useState('')
   const [repeat, updateRepeat] = useState('')
+  const [hasCookie, updateHasCookie] = useState(false)
   return (
     <div className='container'>
+      {hasCookie && <Redirect to='/'/>}
       <h1>Sign Up</h1>
       <form>
         <div className='input-group'>
@@ -26,7 +42,7 @@ function SignUp() {
           <label>Repeat Password</label>
         </div>
         <div className='input-group'>
-          <button onClick={(e) => auth(e)}>Sign Up</button>
+          <button onClick={(e) => auth(e, updateHasCookie, { username, password }, repeat)}>Sign Up</button>
         </div>
       </form>
     </div>
