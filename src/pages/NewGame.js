@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import openSocket from "socket.io-client"
+import decode from "jwt-decode"
 
-const createGame = (e, updateCreated) => {
+const socket = openSocket("http://localhost:4000")
+
+const createGame = (e, updateCreated, lobbyName) => {
+  if (localStorage.getItem("cardCreatorToken")) {
+    const info = decode(localStorage.getItem("cardCreatorToken"))
+    socket.emit('create lobby', lobbyName, info._id)
+    updateCreated(true)
+  }
   e.preventDefault()
-  updateCreated(true)
 }
 
-function NewGame () {
+function NewGame() {
   const [lobbyName, updateLobbyName] = useState('')
   const [created, updateCreated] = useState(false)
-  return(
+  return (
     <div className='container'>
       {created && <Redirect to={`/play/${lobbyName}`} />}
       <h1>Create a game</h1>
@@ -19,7 +27,7 @@ function NewGame () {
           <label>Lobby Name</label>
         </div>
         <div className='input-group'>
-          <button onClick={(e) => createGame(e, updateCreated)}>Create!</button>
+          <button onClick={(e) => createGame(e, updateCreated, lobbyName)}>Create!</button>
         </div>
       </form>
     </div>

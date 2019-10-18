@@ -138,4 +138,116 @@ nav > ul > li > a > p {
   margin: 0px;
   font-weight: bold;
 }
+
+.game-screen {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 3fr 1fr;
+      grid-template-columns: 1fr 3fr 1fr;
+  height: calc(100vh - 117px);
+  width: 100vw;
+}
+
+.game-screen .players {
+  background: var(--color-container);
+  width: 100%;
+}
+
+.game-screen .play-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  background: var(--color-container);
+  border-left: 2px solid var(--color-text-main);
+}
+
+.game-screen .play-area > .deck {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.game-screen .play-area > .deck > img {
+  height: 50%;
+  margin: 20px;
+  margin-bottom: 60%;
+}
+
+.game-screen .chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  background: var(--color-container);
+  border-left: 2px solid var(--color-text-main);
+}
+
+.game-screen .chat > ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.game-screen .cards {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 30vh;
+  border-top: 2px solid var(--color-text-main);
+  background: var(--color-container);
+  bottom: 0px;
+  left: 0px;
+  -webkit-transition: 250ms;
+  transition: 250ms;
+  -webkit-transform: translate(0px, 15vh);
+          transform: translate(0px, 15vh);
+}
+
+.game-screen .cards:hover {
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+.game-screen .cards > img {
+  height: 70%;
+  -webkit-transition: 250ms;
+  transition: 250ms;
+}
+
+.game-screen .cards > img:hover {
+  height: 90%;
+}
 /*# sourceMappingURL=App.css.map */

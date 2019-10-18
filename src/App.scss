@@ -108,3 +108,72 @@ nav {
 
   }
 }
+
+.game-screen {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  height: calc(100vh - 117px);
+  width: 100vw;
+  .players {
+    background: var(--color-container);
+    width: 100%;
+  }
+  .play-area {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: var(--color-container);
+    border-left: 2px solid var(--color-text-main);
+    > .deck {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > img{
+        height: 50%;
+        margin: 20px;
+        margin-bottom: 60%;
+      }
+    }
+  }
+  .chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    background: var(--color-container);
+    border-left: 2px solid var(--color-text-main);
+
+    > ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+  .cards {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+    border-top: 2px solid var(--color-text-main);
+    background: var(--color-container);
+    bottom: 0px;
+    left: 0px;
+    transition: 250ms;
+    transform: translate(0px, 15vh);
+
+    &:hover {
+      transform: translate(0px, 0px);
+    }
+
+    > img {
+      height: 70%;
+      transition: 250ms;
+      &:hover {
+        height:90%;
+      }
+    }
+  }
+}
