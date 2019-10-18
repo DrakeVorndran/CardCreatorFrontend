@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
-const auth = (e, updateHasCookie, body, repeat) => {
+import { addAuth, removeAuth } from '../actions'
+import { connect } from 'react-redux'
+
+const auth = (e, updateHasCookie, body, repeat, addAuth) => {
   e.preventDefault()
   if (repeat === body.password) {
     fetch('http://localhost:4000/users/new', {
@@ -13,20 +16,21 @@ const auth = (e, updateHasCookie, body, repeat) => {
     })
       .then(res => res.json())
       .then(json => {
+        addAuth()
         localStorage.setItem("cardCreatorToken", json.token)
         updateHasCookie(true)
       })
   }
 }
 
-function SignUp() {
+function SignUp(props) {
   const [username, updateUsername] = useState('')
   const [password, updatePassword] = useState('')
   const [repeat, updateRepeat] = useState('')
   const [hasCookie, updateHasCookie] = useState(false)
   return (
     <div className='container'>
-      {hasCookie && <Redirect to='/'/>}
+      {hasCookie && <Redirect to='/' />}
       <h1>Sign Up</h1>
       <form>
         <div className='input-group'>
@@ -42,11 +46,24 @@ function SignUp() {
           <label>Repeat Password</label>
         </div>
         <div className='input-group'>
-          <button onClick={(e) => auth(e, updateHasCookie, { username, password }, repeat)}>Sign Up</button>
+          <button onClick={(e) => auth(e, updateHasCookie, { username, password }, repeat, props.addAuth)}>Sign Up</button>
         </div>
       </form>
     </div>
   )
 }
 
-export default SignUp
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
+const mapDispatchToProps = () => {
+  return {
+    addAuth,
+    removeAuth
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps())(SignUp)

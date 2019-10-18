@@ -14,6 +14,8 @@ class Game extends Component {
       messageValue: '',
       lobbyId: this.props.match.params.lobbyId,
       players: [],
+      selceted: NaN,
+      discard: [],
     }
   }
   componentDidMount() {
@@ -26,6 +28,7 @@ class Game extends Component {
       this.handleChat()
       this.handleDraw()
       this.handlePlayers()
+      this.handleDiscard()
     }
   }
 
@@ -41,9 +44,15 @@ class Game extends Component {
     })
   }
 
+  handleDiscard() {
+    this.socket.on('update discard', discard => {
+      this.setState({discard})
+    })
+  }
+
   handlePlayers() {
     this.socket.on("add player", (players) => {
-      this.setState({players})
+      this.setState({ players })
     })
   }
 
@@ -62,27 +71,32 @@ class Game extends Component {
   }
 
   drawCard() {
-    console.log("drawing card")
     this.socket.emit('draw card', this.state.lobbyId, this.state.user)
   }
 
+  playCard() {
+    if (!isNaN(this.state.selceted)) {
+      const card = this.state.cards[this.state.selceted]
+      this.socket.emit('play card', this.state.lobbyId, this.state.user, card)
+    }
+  }
   render() {
     return (
       <div className='game-screen'>
         <div className='players'>
           <h1>Players</h1>
-        <ul>
-          {this.state.players.map(player => <li key={player._id}>{player.username}</li>)}
-        </ul>
+          <ul>
+            {this.state.players.map(player => <li key={player._id}>{player.username}</li>)}
+          </ul>
         </div>
         <div className='play-area'>
           <div className='deck'>
             <h2>deck</h2>
             <img onClick={() => this.drawCard()} src='/cards/back.svg' alt='back' />
-
           </div>
           <div className='discard'>
-            <img></img>
+            <h2>discard</h2>
+            <img src={!this.state.discard[0] ? '/cards/placeholder.svg' : this.state.discard[0].image } onClick={() => this.playCard()} alt='placeholder' />
           </div>
         </div>
         <div className='chat'>
@@ -97,7 +111,7 @@ class Game extends Component {
           </ul>
         </div>
         <div className='cards'>
-          {this.state.cards.map((card) => <img src={card.image} alt={card.value} />)}
+          {this.state.cards.map((card, i) => <img onClick={() => this.setState({ selceted: i })} key={`${card.value}-${i}`} src={card.image} alt={card.value} className={i === this.state.selceted ? 'selected' : ''} />)}
         </div>
       </div>
     )

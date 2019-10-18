@@ -14,7 +14,9 @@ import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
 import Game from './pages/Game'
 import Navbar from './components/Navbar'
-// import LogOut from './pages/LogOut'
+
+
+
 
 const store = createStore(reducers)
 
@@ -23,17 +25,17 @@ function App() {
     <Provider store={store} >
       <Router>
         <div className="App">
-          <Navbar />
+          <Navbar/>
           <div className='global-container'>
-          <Switch>
-            <Route exact path='/' component={Home}></Route>
-            <Route path='/new' component={NewGame}></Route>
-            <Route path='/join' component={JoinGame}></Route>
-            <Route path='/log-in' component={LogIn}></Route>
-            <Route path='/sign-up' component={SignUp}></Route>
-            <Route path='/play/:lobbyId' component={Game}></Route>
-            {/* <Route path='/log-out' component={LogOut}></Route> */}
-          </Switch>
+            <Switch>
+              <Route exact path='/' component={Home}></Route>
+              <Route path='/new' component={NewGame}></Route>
+              <Route path='/join' component={JoinGame}></Route>
+              <Route path='/log-in' component={LogIn}></Route>
+              <Route path='/sign-up' component={SignUp}></Route>
+              <Route path='/play/:lobbyId' component={Game}></Route>
+              {/* <Route path='/log-out' component={LogOut}></Route> */}
+            </Switch>
           </div>
         </div>
       </Router>
@@ -41,4 +43,7 @@ function App() {
   );
 }
 
-export default App;
+
+
+export default App
+

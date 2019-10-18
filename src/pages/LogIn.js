@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
+import { addAuth, removeAuth } from '../actions'
+import { connect } from 'react-redux'
 
-
-const auth = (e, updateHasCookie, body,) => {
+const auth = (e, updateHasCookie, body, addAuth) => {
   e.preventDefault()
   fetch('http://localhost:4000/users/login', {
     method: 'POST',
@@ -14,12 +15,13 @@ const auth = (e, updateHasCookie, body,) => {
   })
   .then(res => res.json())
   .then(json => {
+    addAuth()
     localStorage.setItem("cardCreatorToken", json.token)
     updateHasCookie(true)
   })
 }
 
-function LogIn() {
+function LogIn(props) {
   const [username, updateUsername] = useState('')
   const [password, updatePassword] = useState('')
   const [hasCookie, updateHasCookie] = useState(false)
@@ -37,11 +39,24 @@ function LogIn() {
           <label>Password</label>
         </div>
         <div className='input-group'>
-          <button onClick={(e) => auth(e, updateHasCookie, { username, password })}>Log In</button>
+          <button onClick={(e) => auth(e, updateHasCookie, { username, password }, props.addAuth)}>Log In</button>
         </div>
       </form>
     </div>
   )
 }
 
-export default LogIn
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+}
+
+const mapDispatchToProps = () => {
+  return {
+    addAuth,
+    removeAuth
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps())(LogIn)

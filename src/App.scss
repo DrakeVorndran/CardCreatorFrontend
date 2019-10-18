@@ -6,12 +6,14 @@ body {
 }
 
 form {
-  > .input-group {
+  >.input-group {
     padding: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    > input[type='text'],input[type='password']  {
+
+    >input[type='text'],
+    input[type='password'] {
       padding: 10px;
       background: var(--color-background);
       border: 2px transparent var(--color-text-main);
@@ -19,23 +21,26 @@ form {
       border-radius: 5px 5px 0px 0px;
       font-size: 1.2em;
     }
-    > label {
+
+    >label {
       font-size: 1.2em;
     }
-    > button {
+
+    >button {
       padding: 15px 50px;
       background: var(--color-background);
       border: 2px var(--color-text-main) solid;
       border-radius: 10px;
       font-size: 1.2em;
       cursor: pointer;
+
       &:hover {
         background: var(--color-hover);
       }
     }
 
   }
-  
+
 }
 
 .global-container {
@@ -69,7 +74,7 @@ nav {
     padding: 0px;
     margin: 0px;
 
-    > li {
+    >li {
       list-style: none;
 
       padding: {
@@ -78,9 +83,10 @@ nav {
         top: 5px;
         bottom: 5px;
       }
+
       margin: 5px;
 
-      > a {
+      >a {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -90,13 +96,16 @@ nav {
         min-width: 100px;
         text-decoration: none;
         border-radius: 5px;
-        &:hover{
+
+        &:hover {
           background: var(--nav-color-hover);
         }
-        > h1 {
+
+        >h1 {
           padding: 10px;
         }
-        > p {
+
+        >p {
           padding: 5px;
           margin: 0px;
           font-weight: bold;
@@ -104,7 +113,7 @@ nav {
       }
     }
 
-    
+
 
   }
 }
@@ -114,28 +123,35 @@ nav {
   grid-template-columns: 1fr 3fr 1fr;
   height: calc(100vh - 117px);
   width: 100vw;
-  .players {
+
+  >.players {
     background: var(--color-container);
     width: 100%;
   }
-  .play-area {
+
+  >.play-area {
     display: flex;
     align-items: center;
     width: 100%;
     background: var(--color-container);
     border-left: 2px solid var(--color-text-main);
-    > .deck {
+
+    >.deck,
+    >.discard {
       display: flex;
       flex-direction: column;
       align-items: center;
-      > img{
-        height: 50%;
+
+      >img {
+        height: 40vh;
         margin: 20px;
         margin-bottom: 60%;
       }
     }
   }
-  .chat {
+
+
+  >.chat {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -144,12 +160,13 @@ nav {
     background: var(--color-container);
     border-left: 2px solid var(--color-text-main);
 
-    > ul {
+    >ul {
       list-style: none;
       display: flex;
       flex-direction: column-reverse;
     }
   }
+
   .cards {
     position: fixed;
     display: flex;
@@ -168,11 +185,18 @@ nav {
       transform: translate(0px, 0px);
     }
 
-    > img {
+    >img {
       height: 70%;
       transition: 250ms;
+
       &:hover {
-        height:90%;
+        transform: rotate(10deg);
+      }
+      &.selected {
+        transform: translate(0, -10%);
+        &:hover {
+          transform: translate(0, -10%) rotate(10deg);
+        }
       }
     }
   }
