@@ -13,6 +13,7 @@ class Game extends Component {
       cards: [{ image: '/cards/ace_of_hearts.svg', value: '1h' }, { image: '/cards/ace_of_clubs.svg', value: '1c' }],
       messageValue: '',
       lobbyId: this.props.match.params.lobbyId,
+      players: [],
     }
   }
   componentDidMount() {
@@ -24,6 +25,7 @@ class Game extends Component {
       this.joinLobby({ username, _id })
       this.handleChat()
       this.handleDraw()
+      this.handlePlayers()
     }
   }
 
@@ -36,6 +38,12 @@ class Game extends Component {
       const messages = this.state.messages
       messages.push(<><b>{data.author}</b>: {data.message}</>)
       this.setState({ messages })
+    })
+  }
+
+  handlePlayers() {
+    this.socket.on("add player", (players) => {
+      this.setState({players})
     })
   }
 
@@ -62,13 +70,19 @@ class Game extends Component {
     return (
       <div className='game-screen'>
         <div className='players'>
-
+          <h1>Players</h1>
+        <ul>
+          {this.state.players.map(player => <li key={player._id}>{player.username}</li>)}
+        </ul>
         </div>
         <div className='play-area'>
           <div className='deck'>
             <h2>deck</h2>
             <img onClick={() => this.drawCard()} src='/cards/back.svg' alt='back' />
 
+          </div>
+          <div className='discard'>
+            <img></img>
           </div>
         </div>
         <div className='chat'>
